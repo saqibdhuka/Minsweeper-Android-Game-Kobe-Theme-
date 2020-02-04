@@ -11,6 +11,11 @@
     <string name="course_home_link">
         <a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home</a>
     </string>
+    <string-array name ="layout">
+        <item>4 x 6</item>
+        <item>5 x 10</item>
+        <item>6 x 15</item>
+    </string-array>
     <string name="title_activity_help">Help</string>
     <string name="title_activity_options">Options</string>
     <string name="title_activity_game">Game</string>

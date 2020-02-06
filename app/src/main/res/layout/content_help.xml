@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Help"
-    tools:showIn="@layout/activity_help">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.75"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/kobe_mural" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="50dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".Help"
+        tools:ignore="MissingConstraints"
+        tools:showIn="@layout/activity_help">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:background="#59FFFFFF"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
                 android:id="@+id/textView"
@@ -22,6 +46,7 @@
                 android:fontFamily="serif"
                 android:text="@string/how_to_play"
                 android:textAllCaps="false"
+                android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -32,6 +57,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="9dp"
                 android:text="@string/instruction_detailed"
+                android:textColor="#000000"
                 android:textSize="16sp" />
 
             <TextView
@@ -43,6 +69,7 @@
                 android:fontFamily="serif"
                 android:text="@string/about_the_author"
                 android:textAllCaps="false"
+                android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -52,7 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/developed_by_saqib_aziz_dhuka" />
+                android:text="@string/developed_by_saqib_aziz_dhuka"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/courseLink"
@@ -60,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="7dp"
-                android:text="@string/course_home_link" />
+                android:text="@string/course_home_link"
+                android:textColor="#020202" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -71,6 +100,7 @@
                 android:fontFamily="serif"
                 android:text="@string/references"
                 android:textAllCaps="false"
+                android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -79,6 +109,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="25dp" />
+                android:layout_marginTop="25dp"
+                android:textColor="#000000" />
+
+
         </LinearLayout>
     </ScrollView>
+</RelativeLayout>

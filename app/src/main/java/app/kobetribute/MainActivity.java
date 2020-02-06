@@ -16,6 +16,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    String boardRow, boardCol, mineNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,21 @@ public class MainActivity extends AppCompatActivity {
         options();
         help();
 
+
+    }
+
+    private void getOptionIntent() {
+        Intent optionsIntent = getIntent();
+        Bundle extras = optionsIntent.getExtras();
+        if(extras != null) {
+            boardRow = extras.getString("BOARD_ROW");
+            boardCol = extras.getString("BOARD_COL");
+            mineNumber = extras.getString("MINE_NUM");
+        }else{
+            boardRow = "4";
+            boardCol = "6";
+            mineNumber = "6";
+        }
     }
 
     private void help(){
@@ -34,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         hlp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent hlpIntent = new Intent(MainActivity.this, Help.class);
                 startActivity(hlpIntent);
             }
@@ -58,7 +74,13 @@ public class MainActivity extends AppCompatActivity {
         plyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getOptionIntent();
                 Intent plyIntent = new Intent(MainActivity.this, Game.class);
+                Bundle extrasGame = new Bundle();
+                extrasGame.putString("ROW", boardRow);
+                extrasGame.putString("COL", boardCol);
+                extrasGame.putString("MINE", mineNumber);
+                plyIntent.putExtras(extrasGame);
                 startActivity(plyIntent);
             }
         });

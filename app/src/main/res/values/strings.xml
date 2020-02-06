@@ -11,16 +11,32 @@
     <string name="course_home_link">
         <a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home</a>
     </string>
-    <string-array name ="layout">
+    <string-array name = "layout">
         <item>4 x 6</item>
         <item>5 x 10</item>
         <item>6 x 15</item>
     </string-array>
+
+    <string-array name = "number_of_mines">
+        <item>6</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+    </string-array>
+
     <string name="title_activity_help">Help</string>
     <string name="title_activity_options">Options</string>
-    <string name="title_activity_game">Game</string>
+    <string name="title_activity_game">Kobe Tribute</string>
     <string name="how_to_play">How To Play:</string>
     <string name="about_the_author">About the Author:</string>
     <string name="developed_by_saqib_aziz_dhuka">Developed By: Saqib Aziz Dhuka</string>
     <string name="references">References:</string>
+    <string name="board_row_x_column">Board Size (Row x Column):</string>
+    <string name="save">save</string>
+    <string name="number_of_hidden_images">Number of hidden Images:</string>
+    <string name="dash"> -- </string>
+    <string name="mines">Mines</string>
+    <string name="of">of</string>
+    <string name="found">Found</string>
+    <string name="number_of_scans_used">Number of Scans Used:</string>
 </resources>

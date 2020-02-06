@@ -63,14 +63,15 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="864dp"
-        android:layout_height="466dp"
-        android:alpha="0.5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="1.0"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/nba_app_background" />
+        app:srcCompat="@drawable/kobe_mural" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,6 +28,7 @@ public class Options extends AppCompatActivity {
         setContentView(R.layout.activity_options);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
@@ -37,6 +39,16 @@ public class Options extends AppCompatActivity {
         saveBtn();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     private void saveBtn() {
         save = (Button) findViewById(R.id.saveBtn);
@@ -78,7 +90,7 @@ public class Options extends AppCompatActivity {
 //            }else {
 //                board_row += board.substring(i);
 //            }
-//
+//3
 //        }
     }
 

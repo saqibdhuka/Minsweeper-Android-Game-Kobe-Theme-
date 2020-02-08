@@ -99,7 +99,7 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="330dp"
+        android:layout_marginStart="250dp"
         android:layout_marginTop="18dp"
         android:text="@string/number_of_scans_used"
         android:textSize="18sp"

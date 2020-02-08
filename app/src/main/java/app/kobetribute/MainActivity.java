@@ -24,12 +24,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         playGame();
         options();
         help();
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                System.exit(0);
+                return true;
+            default:
+                System.exit(0);
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void getOptionIntent() {

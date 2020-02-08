@@ -62,6 +62,7 @@ public class Board {
     }
 
     public int getBoardArrayVal(int r, int c){return boardArr[r][c];}
+    public void setBoardArrayVal(int r, int c, int val){boardArr[r][c] = val;}
 
     public void setBoardArr(int[][] boardArr) {
         this.boardArr = boardArr;

@@ -39,4 +39,6 @@
     <string name="of">of</string>
     <string name="found">Found</string>
     <string name="number_of_scans_used">Number of Scans Used:</string>
+    <string name="congratulations_nyou_won">CONGRATULATIONS!! You Won!!</string>
+    <string name="mamba_out">\"Mamba Out\"</string>
 </resources>

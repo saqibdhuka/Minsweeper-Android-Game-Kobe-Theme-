@@ -13,8 +13,11 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,12 +31,15 @@ public class Game extends AppCompatActivity {
     int row, col, mineNo, mineFound, scanUsed;
     TextView totalMine, foundMine, scans;
     Board newBoard;
+    boolean boardButton[][];
+    Button buttonArr[][];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         totalMine = (TextView) findViewById(R.id.setMineTotal);
         foundMine = (TextView) findViewById(R.id.setMineFound);
@@ -44,9 +50,30 @@ public class Game extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void setupBoardButtonArr(int r, int c){
+        for (int i =0 ; i< r; i++){
+            for(int j =0; j< c; j++){
+                boardButton[i][j] = false;
+            }
+        }
+    }
     private void setupButtonGrid() {
 
         setup();
+        buttonArr = new Button[row][col];
+        boardButton = new boolean[row][col];
+        setupBoardButtonArr(row, col);
         mineFound =0;
         scanUsed = 0;
 
@@ -71,7 +98,6 @@ public class Game extends AppCompatActivity {
                 Button button = new Button(this);
                 final int FINAL_ROW = r;
                 final int FINAL_COL = c;
-                final Button FINAL_BTN = button;
                 button.setLayoutParams(new TableRow.LayoutParams(//Stretching buttons
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
@@ -81,21 +107,30 @@ public class Game extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        buttonClick(FINAL_BTN, FINAL_ROW, FINAL_COL);
+                        buttonClick(FINAL_ROW, FINAL_COL);
                     }
                 });
                 tableRow.addView(button);
+                buttonArr[r][c] = button;
             }
         }
     }
 
-    private void buttonClick(Button btn, int rowNum, int rowCol){
-        if(newBoard.getBoardArrayVal(rowNum, rowCol) != -1){
-            btn.setText(Integer.toString(newBoard.getBoardArrayVal(rowNum,rowCol)));
+    private void buttonClick(int rowNum, int colNum){
+        Button btn = buttonArr[rowNum][colNum];
+        if(boardButton[rowNum][colNum] == true)
+            return;
+        if(newBoard.getBoardArrayVal(rowNum, colNum) != -1){
+            btn.setText(Integer.toString(newBoard.getBoardArrayVal(rowNum,colNum)));
             scanUsed++;
+            boardButton[rowNum][colNum] = true;
             setupText(scans, scanUsed);
         }else{
 //            btn.setBackgroundResource(R.drawable.kobe_mural); // Does not scale image so DONOT USE!!
+
+            //Lock Button
+            lockBtn();
+
             //scale image to button
             int newWidth = btn.getWidth();
             int newHeight = btn.getHeight();
@@ -104,10 +139,57 @@ public class Game extends AppCompatActivity {
             Resources newResource = getResources();
             btn.setBackground(new BitmapDrawable(newResource, scaledBM));
 
+            boardButton[rowNum][colNum] = true;
+            newBoard.setBoardArrayVal(rowNum, colNum, -5);
+            newBoard.assignBoard();
+
+            updateValues();
+
             mineFound++;
+            if(mineFound == mineNo){
+                gameEnd();
+            }
             setupText(foundMine, mineFound);
         }
 
+    }
+
+    public void gameEnd(){
+        openDialog();
+
+    }
+
+    private void openDialog() {
+        DialogBox gameEnd = new DialogBox();
+        gameEnd.show(getSupportFragmentManager(), "Game End");
+
+    }
+
+    private void updateValues() {
+        for(int r =0; r < row; r++){
+            for(int c =0; c< col; c++){
+                if(boardButton[r][c] == true && newBoard.getBoardArrayVal(r,c) != -1){
+                    buttonArr[r][c].setText(Integer.toString(newBoard.getBoardArrayVal(r,c)));
+                }
+            }
+        }
+    }
+
+    private void lockBtn(){
+        for (int lockRow = 0; lockRow < row; lockRow++){
+            for (int lockCol = 0; lockCol < col; lockCol++){
+                Button btnNew = buttonArr[lockRow][lockCol];
+
+                int width = btnNew.getWidth();
+                btnNew.setMinWidth(width);
+                btnNew.setMaxWidth(width);
+
+                int height = btnNew.getHeight();
+                btnNew.setMinHeight(height);
+                btnNew.setMaxHeight(height);
+
+            }
+        }
     }
 
     private void setupText(TextView txt, int val){

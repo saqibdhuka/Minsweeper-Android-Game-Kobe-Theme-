@@ -57,16 +57,16 @@ public class Board {
         this.column = column;
     }
 
-    public int[][] getBoardArr() {
-        return boardArr;
-    }
+//    public int[][] getBoardArr() {
+//        return boardArr;
+//    }
 
     public int getBoardArrayVal(int r, int c){return boardArr[r][c];}
     public void setBoardArrayVal(int r, int c, int val){boardArr[r][c] = val;}
 
-    public void setBoardArr(int[][] boardArr) {
-        this.boardArr = boardArr;
-    }
+//    public void setBoardArr(int[][] boardArr) {
+//        this.boardArr = boardArr;
+//    }
 
 
     //From https://www.geeksforgeeks.org/generating-random-numbers-in-java/
@@ -81,9 +81,6 @@ public class Board {
 
                 randRow = randGen.nextInt(getRow());
                 randCol = randGen.nextInt(getColumn());
-
-                Log.d("BoardClass", "randRow: " + randRow);
-                Log.d("BoardClass", "randCol: " + randCol);
                 if(boardArr[randRow][randCol] != -1){
                     boardArr[randRow][randCol] = -1;
                     flag = false;

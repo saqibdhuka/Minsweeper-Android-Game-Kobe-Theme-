@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent hlpIntent = new Intent(MainActivity.this, Help.class);
                 startActivity(hlpIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent optIntent = new Intent(MainActivity.this, Options.class);
                 startActivity(optIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 extrasGame.putString("MINE", mineNumber);
                 plyIntent.putExtras(extrasGame);
                 startActivity(plyIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }

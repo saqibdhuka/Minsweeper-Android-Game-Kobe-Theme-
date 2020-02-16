@@ -31,7 +31,7 @@ public class Game extends AppCompatActivity {
     int row, col, mineNo, mineFound, scanUsed;
     TextView totalMine, foundMine, scans;
     Board newBoard;
-    boolean boardButton[][];
+    int boardButton[][];
     Button buttonArr[][];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +61,16 @@ public class Game extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
     public void setupBoardButtonArr(int r, int c){
         for (int i =0 ; i< r; i++){
             for(int j =0; j< c; j++){
-                boardButton[i][j] = false;
+                boardButton[i][j] = 0;
             }
         }
     }
@@ -72,7 +78,7 @@ public class Game extends AppCompatActivity {
 
         setup();
         buttonArr = new Button[row][col];
-        boardButton = new boolean[row][col];
+        boardButton = new int[row][col];
         setupBoardButtonArr(row, col);
         mineFound =0;
         scanUsed = 0;
@@ -118,38 +124,51 @@ public class Game extends AppCompatActivity {
 
     private void buttonClick(int rowNum, int colNum){
         Button btn = buttonArr[rowNum][colNum];
-        if(boardButton[rowNum][colNum] == true)
-            return;
-        if(newBoard.getBoardArrayVal(rowNum, colNum) != -1){
+        if(boardButton[rowNum][colNum] == 2){
             btn.setText(Integer.toString(newBoard.getBoardArrayVal(rowNum,colNum)));
+            btn.setTextColor(getApplication().getResources().getColor(R.color.white));
+            btn.setTextSize(20);
             scanUsed++;
-            boardButton[rowNum][colNum] = true;
             setupText(scans, scanUsed);
-        }else{
-//            btn.setBackgroundResource(R.drawable.kobe_mural); // Does not scale image so DONOT USE!!
+            boardButton[rowNum][colNum]++;
+            return;
+        }else if(boardButton[rowNum][colNum] == 1){
+            return;
+        }
+        if(boardButton[rowNum][colNum] == 0) {
+            if (newBoard.getBoardArrayVal(rowNum, colNum) > -1) {
+                btn.setText(Integer.toString(newBoard.getBoardArrayVal(rowNum, colNum)));
+                btn.setTextColor(getApplication().getResources().getColor(R.color.black));
+                btn.setTextSize(20);
+                scanUsed++;
+                boardButton[rowNum][colNum] = 1;
+                setupText(scans, scanUsed);
+            } else {
+                //            btn.setBackgroundResource(R.drawable.kobe_mural); // Does not scale image so DONOT USE!!
 
-            //Lock Button
-            lockBtn();
+                //Lock Button
+                lockBtn();
 
-            //scale image to button
-            int newWidth = btn.getWidth();
-            int newHeight = btn.getHeight();
-            Bitmap originalBM = BitmapFactory.decodeResource(getResources(), R.drawable.revealed_image_png);
-            Bitmap scaledBM = Bitmap.createScaledBitmap(originalBM, newWidth, newHeight, true);
-            Resources newResource = getResources();
-            btn.setBackground(new BitmapDrawable(newResource, scaledBM));
+                //scale image to button
+                int newWidth = btn.getWidth();
+                int newHeight = btn.getHeight();
+                Bitmap originalBM = BitmapFactory.decodeResource(getResources(), R.drawable.revealed_image_png);
+                Bitmap scaledBM = Bitmap.createScaledBitmap(originalBM, newWidth, newHeight, true);
+                Resources newResource = getResources();
+                btn.setBackground(new BitmapDrawable(newResource, scaledBM));
 
-            boardButton[rowNum][colNum] = true;
-            newBoard.setBoardArrayVal(rowNum, colNum, -5);
-            newBoard.assignBoard();
+                boardButton[rowNum][colNum] = 2;
+                newBoard.setBoardArrayVal(rowNum, colNum, -5);
+                newBoard.assignBoard();
 
-            updateValues();
+                updateValues();
 
-            mineFound++;
-            if(mineFound == mineNo){
-                gameEnd();
+                mineFound++;
+                if (mineFound == mineNo) {
+                    gameEnd();
+                }
+                setupText(foundMine, mineFound);
             }
-            setupText(foundMine, mineFound);
         }
 
     }
@@ -168,7 +187,7 @@ public class Game extends AppCompatActivity {
     private void updateValues() {
         for(int r =0; r < row; r++){
             for(int c =0; c< col; c++){
-                if(boardButton[r][c] == true && newBoard.getBoardArrayVal(r,c) != -1){
+                if(boardButton[r][c] > 0 && newBoard.getBoardArrayVal(r,c) > -1){
                     buttonArr[r][c].setText(Integer.toString(newBoard.getBoardArrayVal(r,c)));
                 }
             }

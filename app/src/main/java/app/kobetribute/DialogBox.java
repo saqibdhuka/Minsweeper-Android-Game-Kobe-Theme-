@@ -30,6 +30,7 @@ public class DialogBox extends AppCompatDialogFragment {
                         Intent newIntent = new Intent(DialogBox.this.getActivity(), MainActivity.class);
                         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(newIntent);
+
                     }
                 });
 

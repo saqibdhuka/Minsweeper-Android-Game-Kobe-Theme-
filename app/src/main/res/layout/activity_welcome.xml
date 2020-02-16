@@ -7,7 +7,7 @@
     tools:context=".Welcome">
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/mambaBckgrnd"
         android:layout_width="1142dp"
         android:layout_height="1886dp"
         android:layout_marginTop="50dp"
@@ -17,14 +17,66 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/welcome_background" />
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="412dp"
-        android:layout_height="336dp"
-        android:layout_marginEnd="60dp"
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="75dp"
+        android:text="@string/by_saqib_dhuka"
+        android:textAlignment="center"
+        android:textColor="#FFFDFD"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:breakStrategy="high_quality"
+        android:fontFamily="sans-serif"
+        android:foregroundTint="#00160000"
+        android:gravity="center"
+        android:text="@string/kobe_tribute"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#FFD600"
+        android:textColorHighlight="#7E0E0E"
+        android:textSize="42sp"
+        android:textStyle="bold"
+        app:autoSizeTextType="none"
+        app:layout_constraintBottom_toTopOf="@+id/author"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/kobeLogo"
+        android:layout_width="232dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/welcome_screen" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="600dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        app:backgroundTint="#49A0AE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/skip"
+        android:focusable="true" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

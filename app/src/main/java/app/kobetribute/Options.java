@@ -50,6 +50,12 @@ public class Options extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
     private void saveBtn() {
         save = (Button) findViewById(R.id.saveBtn);
         save.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +80,8 @@ public class Options extends AppCompatActivity {
                 saveBundle.putString("MINE_NUM", mine_num);
                 saveIntent.putExtras(saveBundle);
                 startActivity(saveIntent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
             }
         });
     }
@@ -82,29 +90,12 @@ public class Options extends AppCompatActivity {
         int xPos = board.indexOf('x');
         board_row = board.substring(0, xPos -1);
 
-
-
-//        for(int i =0; i < board.length(); i++){
-//            if(board.substring(i) == " ") {
-//                break;
-//            }else {
-//                board_row += board.substring(i);
-//            }
-//3
-//        }
     }
 
     private void getColString(){
 
         int xPos = board.indexOf('x');
         board_col = board.substring(xPos +2);
-
-//        board_col="";
-//        for(int i =4; i < board.length(); i++){
-//            if(board.substring(i) == " ")
-//                break;
-//            board_col += board.substring(i);
-//        }
     }
 
     private void boardSize() {

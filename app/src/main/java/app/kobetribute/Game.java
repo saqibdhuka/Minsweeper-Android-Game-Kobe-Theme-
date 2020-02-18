@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
@@ -13,9 +14,12 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
@@ -29,10 +33,13 @@ import app.model.Board;
 public class Game extends AppCompatActivity {
 
     int row, col, mineNo, mineFound, scanUsed;
+    int TIME = 1500;
     TextView totalMine, foundMine, scans;
     Board newBoard;
+    Handler handler;
     int boardButton[][];
     Button buttonArr[][];
+    Button newBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +73,7 @@ public class Game extends AppCompatActivity {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
+
 
     public void setupBoardButtonArr(int r, int c){
         for (int i =0 ; i< r; i++){
@@ -142,10 +150,9 @@ public class Game extends AppCompatActivity {
                 btn.setTextSize(20);
                 scanUsed++;
                 boardButton[rowNum][colNum] = 1;
+                scan(rowNum, colNum);
                 setupText(scans, scanUsed);
             } else {
-                //            btn.setBackgroundResource(R.drawable.kobe_mural); // Does not scale image so DONOT USE!!
-
                 //Lock Button
                 lockBtn();
 
@@ -171,6 +178,37 @@ public class Game extends AppCompatActivity {
             }
         }
 
+    }
+
+    private void scan(int r, int c) {
+        Button b;
+        for(int i=0; i < row; i++){
+            b = buttonArr[i][c];
+            scanAnimation(i, c);
+        }
+
+        for(int j = 0; j < col; j++){
+            b = buttonArr[r][j];
+            scanAnimation(r,j);
+        }
+    }
+
+    public void scanAnimation(int rNum, int cNum){
+        handler = new Handler();
+
+        TIME = 300;
+        newBtn = buttonArr[rNum][cNum];
+        Animation fade_btn = AnimationUtils.loadAnimation(this, R.anim.button_anim);
+        newBtn.setAnimation(fade_btn);
+        if(boardButton[rNum][cNum] == 1)
+            newBtn.setBackgroundResource(android.R.drawable.btn_default);
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                newBtn.setBackgroundResource(android.R.drawable.btn_default);
+//
+//            }
+//        },0);
     }
 
     public void gameEnd(){

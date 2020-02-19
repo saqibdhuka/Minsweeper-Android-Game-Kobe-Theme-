@@ -11,3 +11,6 @@ Spinner drop-down: https://www.youtube.com/watch?v=urQp7KsQhW8
 Welcome Screen: https://www.youtube.com/watch?v=jXtof6OUtcE&t=21s
 Welcome Screen Animations:https://www.youtube.com/watch?v=JLIFqqnSNmg
 Animation files (between Activities): https://www.youtube.com/watch?v=0s6x3Sn4eYo&list=PLrnPJCHvNZuARS1W7qMt-zxBNqWYZpOg6&index=3
+Mine click sound: http://soundbible.com/1997-Cha-Ching-Register.html
+Scan Sound: http://www.rpi.edu/dept/acm/packages1/bzflag/1.7g-rpi/teamgrab.wav
+Playing Sound tutorial: https://www.youtube.com/watch?v=9oj4f8721LM

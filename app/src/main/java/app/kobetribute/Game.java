@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,6 +40,7 @@ public class Game extends AppCompatActivity {
     Handler handler;
     int boardButton[][];
     Button buttonArr[][];
+    MediaPlayer mineSound, scanSound;
     Button newBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +50,11 @@ public class Game extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mineSound = MediaPlayer.create(this, R.raw.chaChing);
+        scanSound = MediaPlayer.create(this, R.raw.scan);
         totalMine = (TextView) findViewById(R.id.setMineTotal);
         foundMine = (TextView) findViewById(R.id.setMineFound);
         scans = (TextView) findViewById(R.id.scansUsed);
-
 
         setupButtonGrid();
 
@@ -137,6 +140,7 @@ public class Game extends AppCompatActivity {
             btn.setTextColor(getApplication().getResources().getColor(R.color.white));
             btn.setTextSize(20);
             scanUsed++;
+            scan(rowNum, colNum);
             setupText(scans, scanUsed);
             boardButton[rowNum][colNum]++;
             return;
@@ -162,6 +166,7 @@ public class Game extends AppCompatActivity {
                 Bitmap originalBM = BitmapFactory.decodeResource(getResources(), R.drawable.revealed_image_png);
                 Bitmap scaledBM = Bitmap.createScaledBitmap(originalBM, newWidth, newHeight, true);
                 Resources newResource = getResources();
+                mineSound.start();
                 btn.setBackground(new BitmapDrawable(newResource, scaledBM));
 
                 boardButton[rowNum][colNum] = 2;
@@ -181,14 +186,12 @@ public class Game extends AppCompatActivity {
     }
 
     private void scan(int r, int c) {
-        Button b;
+        scanSound.start();
         for(int i=0; i < row; i++){
-            b = buttonArr[i][c];
             scanAnimation(i, c);
         }
 
         for(int j = 0; j < col; j++){
-            b = buttonArr[r][j];
             scanAnimation(r,j);
         }
     }

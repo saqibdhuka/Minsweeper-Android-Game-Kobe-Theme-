@@ -12,15 +12,15 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".Welcome"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Game"
+        <activity android:name=".Game"
             android:label="@string/title_activity_game"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
